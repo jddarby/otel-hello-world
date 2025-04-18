@@ -11,11 +11,10 @@ echo Adding required helm repos
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
 
-echo Installing otel-hello-world chart
-helm dependency update otel-hello-world
-helm install hello-world otel-hello-world --namespace observability --create-namespace
+echo Installing observability chart
+helm dependency build observability
+helm install hello-world observability --namespace observability --create-namespace
 
 START_TIME=$(date +%s)
 TIMEOUT=300
@@ -30,7 +29,7 @@ while [[ $(kubectl get pods -n observability --no-headers | grep -c 'Running') -
     fi
     
     echo "Waiting for all pods in the observability namespace to be ready..."
-    sleep 5
+    sleep 10
 done
 
 ENVOY_PORT=$(docker ps --format='{{json .}}' -f=name=kindccm | jq .Ports | grep -oP '0\.0\.0\.0:\K\d+(?=->80/tcp)')
