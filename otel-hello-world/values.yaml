@@ -1,0 +1,21 @@
+opentelemetry-operator:
+  enabled: true
+  manager:
+    collectorImage:
+      repository: otel/opentelemetry-collector-contrib
+  admissionWebhooks:
+    autoGenerateCert:
+      enabled: true
+    certManager:
+      enabled: false
+
+grafana:
+  enabled: true
+  adminPassword: "password123"
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 3000
+  persistence:
+    enabled: true
+    size: 1Gi
