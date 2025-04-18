@@ -58,15 +58,17 @@ replicaset.apps/prometheus-7d54f99957      1         1         1       30m
 
 Follow the URL given in the set-up scripts output to access the grafana dashboard. The username is `admin` and the password is `password123`.
 
-Once logged in, navigate to Connections > Data sources and you should see the following:
+Once logged in, navigate to `Connections` > `Data sources` and you should see the following:
 ![alt text](images/image.png)
 
 The default Prometheus data source should already be set-up for you.
 
-From this page click Explore next to the Prometheus data source. You should see the following:
+From this page click `Explore` next to the Prometheus data source.
+
+You should see the following:
 ![alt text](images/image2.png)
 
-If you click on the Select metric dropdown, you will see there are no metrics available.
+If you click on the `Select metric` dropdown, you will see there are no metrics available. This is expected.
 
 In the next section, we will see this dropdown populated by installing a dummy app on the cluster and then create a OpenTelemetry collector to collect metrics from it.
 
