@@ -22,8 +22,10 @@ spec:
         send_batch_size: 100
 
     exporters:
-      prometheus:
-        endpoint: "0.0.0.0:8889"
+      otlphttp:
+        endpoint: http://prometheus.observability.svc:9090/api/v1/otlp
+        tls:
+          insecure: true
 
 
     service:
@@ -31,4 +33,4 @@ spec:
         metrics:
           receivers: [prometheus]
           processors: [batch]
-          exporters: [prometheus]
+          exporters: [otlphttp]
